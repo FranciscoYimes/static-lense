@@ -17,7 +17,7 @@
 			{
 				array_push($result_array, $row);
 			}
-			echo json_encode(array('response' => true, 'questions' => $result_array));
+			echo json_encode(array('response' => true, 'typeQuestions' => $result_array));
 		}
 		else
 		{

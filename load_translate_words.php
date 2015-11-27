@@ -1,7 +1,7 @@
 <?php
-	
+
 	include("connection.php");
-	$idLevel = $_POST['idLevel'];
+	$cont = 0;
 
 	if ($connection->connect_errno) 
 	{
@@ -9,22 +9,21 @@
 	}
 	else
 	{
-		if ($result = $connection->query("SELECT idExercise, title, text1, text2 FROM exercise WHERE idLevel = $idLevel; "))
+		if ($result = $connection->query("SELECT word FROM translate_words ;"))
 		{
-			
 			$result_array = array();
 			while ($row = $result->fetch_assoc())
 			{
+				$cont = $cont + 1;
 				array_push($result_array, $row);
 			}
-			echo json_encode(array('response' => true, 'exercises' => $result_array));
+			echo json_encode($cont);
+			echo json_encode(array('response' => true, 'questions' => $result_array));
 		}
 		else
 		{
 			echo json_encode(array('response' => false));
 		}
 	}
-
-	$connection->close();
 
 ?>
